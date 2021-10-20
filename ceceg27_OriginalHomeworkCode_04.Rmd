@@ -1,5 +1,5 @@
 ---
-title: 'no'
+title: 'ceceg27_Oringinalhomeworkcode_04'
 output: html_document
 ---
 
@@ -13,16 +13,60 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
+#homework #4
+
+#challenge 1
+
+```{r}
+#guideline #1 
+z.prop.test <- function(p1, n1, p2=NULL, N2=NULL,p0, alternative = c("two.sided"), conf.level = 0.95) {
+  
+}
 ```
 
-## Including Plots
+#challenge 2 - Linear regression model 
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+#call functions and import data
+library(curl)
+library(ggplot2)
+d <- curl('https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall21/KamilarAndCooperData.csv')
+info <- read.csv(d, stringsAsFactors = FALSE, header = TRUE)
+head(data)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+#regular model (no log)
+#use lm function to find values
+y <- data$MaxLongevity_m
+x <- data$Brain_Size_Species_Mean
+w <- lm(y ~ x, data=info)
+summary(w)
+#make a function to use in geom_test label 
+lm_eqn <- function(w) {
+a = format(coef(w)[1], digits = 3)
+b = format(abs(coef(w)[2]), digits = 3)
+  if (coef(w)[2] >= 0)  {
+    eq <- paste('y','=', a, '+', b, 'x')
+  } else {
+    eq <- paste('y','=', a, '-', b, 'x') 
+eq
+  }
+}
+#run ggplot
+gg <- ggplot(data = info, aes(x = x, y = y)) + geom_point() + geom_text(x = 500, y = 800,label= lm_eqn(w)) + geom_smooth(method = "lm", formula = y ~ x)
+gg
+```
+
+#point estimate of slope
+```{r}
+
+
+
+
+
+
+
+
+
+
