@@ -88,7 +88,6 @@ h<-data.frame(c)
 #name our variables so we dont have to keep retyping them 
 x<-d$MaxLongevity_m 
 y<-d$Brain_Size_Species_Mean 
-
 ```
 
 ```{r}
