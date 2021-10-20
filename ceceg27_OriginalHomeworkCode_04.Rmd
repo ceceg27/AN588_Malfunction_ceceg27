@@ -1,8 +1,72 @@
 #homework 4
 [1] Write a simple R function, Z.prop.test(), that can perform one- or two-sample Z-tests for proportion data, using the following guidelines:
 ```{r}
+z.prop.test <- function(p1, n1, p0, p2= NULL, n2= NULL, alternative="two.tailed", conf.level=0.95){
+  #error messages for rule of thumb
+   if (n1*p0 < 5)
+  {
+  print("Non Normal!")
+  }
+if (n1*(1-p0) < 5)
+  {
+  print("Non Normal!")
+  }
+#these only need to show up if using p2 and n2
+if (!is.null(n2))
+{
+  if (n2*p0 < 5)
+  {
+  print("Non Normal!")
+  }
+  if (n2*(1-p0) < 5)
+  {
+  print("Non Normal!")
+  }
+  #function for z test if there are no errors
+  if (alternative == "two.tailed")
+  {
+    z<- (p1-p0)/sqrt((p0*(1-p0))/n1) #z score
+    p<- pnorm(z, lower.tail = TRUE) #p value
+    lwr <- (p1-qnorm(conf.level) * sqrt(p1*(1-p1))/n1) #confidence intervals
+    upr <- (p1+qnorm(conf.level) * sqrt(p1*(1-p1))/n1)
+    ci <- c(lwr, upr)
+   }
+#this is for one sample, when n2 and p2 are null
+  if (is.null(n2)|is.null(p2))
+  {
+    z<- (p1-p0)/sqrt((p0*(1-p0))/n1)
+    p<- pnorm(z, lower.tail = TRUE)
+    lwr <- (p1-qnorm(conf.level) * sqrt(p1*(1-p1))/n1)
+    upr <- (p1+qnorm(conf.level) * sqrt(p1*(1-p1))/n1)
+    ci <- c(lwr, upr)
+  }
+#this is for two sample, if p1 is less than p2
+    if (alternative == "less")
+  {
+    pstar<- (sum(p1*n1)+sum(p2*n2))/(n1+n2) #for a pooled proportion
+    z<- (p2 - p1)/sqrt((pstar * (1-pstar)) * (1/length(n1) + 1/length(n2))) #z score
+    p<- 1-pnorm(z, lower.tail = T) + pnorm(z,lower.tail = F) #p value
+    lwr <- ((p2-p1)-qnorm(conf.level) * sqrt((p2-p1)*(1-(p2-p1)))/n1) # ci intervals
+    upr <- ((p2-p1)+qnorm(conf.level) * sqrt((p2-p1)*(1-(p2-p1)))/n1)
+    ci <- c(lwr, upr)
+  }
+ #this is for two sample, if p1 is greater than p2
+   if (alternative == "greater")
+  {
+    pstar<- (sum(p1*n1)+sum(p2*n2))/(n1+n2) #for a pooled proportion
+    z<- (p1 - p2)/sqrt((pstar * (1-pstar)) * (1/length(n1) + 1/length(n2))) #z score
+    p<- 1-pnorm(z, lower.tail = T) + pnorm(z,lower.tail = F) #p value
+    lwr <- ((p1-p2)-qnorm(conf.level) * sqrt((p1-p2)*(1-(p1-p2)))/n1) #ci intervals
+    upr <- ((p1-p2)+qnorm(conf.level) * sqrt((p1-p2)*(1-(p1-p2)))/n1)
+    ci <- c(lwr, upr)
+  }
+values<- c("z-stat", z, "p value", p, "conf. intervals", ci)
+print(values)
+}
+}
 
-
+```
+```
 
 [2] The dataset from Kamilar and Cooper has in it a large number of variables related to life history and body size. For this exercise, the end aim is to fit a simple linear regression model to predict longevity (MaxLongevity_m) measured in months from species’ brain size (Brain_Size_Species_Mean) measured in grams. Do the following for both longevity~brain size and log(longevity)~log(brain size):
 
