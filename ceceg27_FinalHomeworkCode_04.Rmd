@@ -67,6 +67,8 @@ print(values)
 }
 ```
 
+*Should the second check for CLT be using np2 and thumb2? other than that, this looks good! But, you need to test the function to see if it actually works!*
+
 [2] The dataset from Kamilar and Cooper has in it a large number of variables related to life history and body size. For this exercise, the end aim is to fit a simple linear regression model to predict longevity (MaxLongevity_m) measured in months from species’ brain size (Brain_Size_Species_Mean) measured in grams. Do the following for both longevity~brain size and log(longevity)~log(brain size):
 
 ```{r}
