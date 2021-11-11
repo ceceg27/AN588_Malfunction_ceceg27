@@ -133,7 +133,7 @@ beta1
 ```
 #interpretation: for every 1 g brain size increases, the animal is expected to live 1.2 months longer buttt brain size at the y intercept is 249 aka the an animal with no brain will still live 249 months, doesn't make much sense
 
-*This may just be the skew in the data (i.e. we dont have any indiviudals in the data with no brain). Also from what I'm seeing these arent the beta values I am seeing *
+*This may just be the skew in the data (i.e. we dont have any indiviudals in the data with no brain). Also from what I'm seeing these arent the beta values I am seeing. you may have your x and y mixed up*
 
 ```{r}
 #find the 90% confidence intervals
