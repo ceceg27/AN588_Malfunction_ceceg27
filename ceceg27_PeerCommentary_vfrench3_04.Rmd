@@ -188,7 +188,7 @@ predict(M1, newdata = data.frame(x = 800), interval = "prediction",level = 0.90)
 ```
 
 #now lets do it all for the log model 
-```{r}
+```{r, eval = FALSE}
 #log transform the variables and make them into a data frame 
 r1<-log(d$MaxLongevity_m)
 r2<-log(d$Brain_Size_Species_Mean)
@@ -208,7 +208,7 @@ ggM2
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 #finding beta0 and beta1 
 t1 <- unlist(logM1$coefficients)
 # unlist to get coefs out of the model
@@ -221,7 +221,7 @@ ci.slope<-confint(M1, level = 0.9)
 ci.slope
 ```
 
-```{r}
+```{r, eval = FALSE}
 #confidence intervals for 90%
 ci <- predict(logM1, newdata = data.frame(size = d$Brain_Size_Species_Mean), interval = "confidence", 
     level = 0.90)  
@@ -249,7 +249,7 @@ loggMod2<-ggplot(data = logNew, aes(x = x, y = y)) + geom_point() +
 loggMod2
 ```
 
-```{r}
+```{r, eval = FALSE}
 #point estimate
 predict(logM1, newdata = data.frame(x = 800))
 #result is 258.2979

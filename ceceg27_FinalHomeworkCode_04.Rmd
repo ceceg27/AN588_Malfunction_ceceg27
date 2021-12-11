@@ -67,6 +67,8 @@ print(values)
 }
 ```
 
+*Should the second check for CLT be using np2 and thumb2? other than that, this looks good! But, you need to test the function to see if it actually works!*
+
 [2] The dataset from Kamilar and Cooper has in it a large number of variables related to life history and body size. For this exercise, the end aim is to fit a simple linear regression model to predict longevity (MaxLongevity_m) measured in months from species’ brain size (Brain_Size_Species_Mean) measured in grams. Do the following for both longevity~brain size and log(longevity)~log(brain size):
 
 ```{r}
@@ -113,6 +115,8 @@ ggM1<-ggplot(data = d, aes(x = x, y = y)) + geom_point() + geom_smooth(method = 
 ggM1
 ```
 
+*it looks like you need to define "m" in your function? Assuming m is supposed to be the model, the function should be taking the data (i.e. function("data object")) rather than the model itself. Right now, it is telling me object m not found*
+
 Identify and interpret the point estimate of the slope (β1
 ), as well as the outcome of the test associated with the hypotheses H0: β1
  = 0; HA: β1
@@ -128,6 +132,8 @@ beta1<-round(t1[2],digits = 2)
 beta1
 ```
 #interpretation: for every 1 g brain size increases, the animal is expected to live 1.2 months longer buttt brain size at the y intercept is 249 aka the an animal with no brain will still live 249 months, doesn't make much sense
+
+*This may just be the skew in the data (i.e. we dont have any indiviudals in the data with no brain). Also from what I'm seeing these arent the beta values I am seeing. you may have your x and y mixed up*
 
 ```{r}
 #find the 90% confidence intervals
@@ -163,6 +169,9 @@ gMod2<-ggplot(data = New, aes(x = x, y = y)) + geom_point() +
 gMod2
 #upper and lower ci and pi are on the graph!
 ```
+
+*great!*
+
 Produce a point estimate and associated 90 percent PI for the longevity of a species whose brain weight is 800 gm. Do you trust the model to predict observations accurately for this value of the explanatory variable? Why or why not?
 ```{r}
 #point estimate
@@ -192,6 +201,8 @@ ggM2 <- ggplot(data=d, aes(x=r2,y=r1))+xlab("log(Brain_Size_Species_Mean)")+ylab
 ggM2
 
 ```
+
+*what is "info"?*
 
 ```{r}
 #finding beta0 and beta1 
@@ -251,7 +262,7 @@ Looking at your two models, which do you think is better? Why?
 - Part 1 was really difficult for me, I think I got really disorganized and did everything a much harder way than it needed to be done. Looking at my group mates codes helped out a lot. I found a way to condense and organize my code so it wasn't so hard to understand
 - I am still not totally sure if part 1 is done right, I definitely need more work with function building
 - I struggled at first to interprey b1 and b0, but after some googling I think i figured it out
-- I don't think I was able to properly add a legend for my graph in part 2 with the ci and pi lines, not sure how to do this still
+- I don't think I was able to properly add a legend for my graph in part 2 with the ci and pi lines, not sure how to do this still *pay close attention to what data you are calling on n your ggplot functions*
 - Overall I think I just need to work on organizing and condensing my work when writing functions
 
 
