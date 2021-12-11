@@ -97,10 +97,10 @@ summary(M1)
 #r2 is .4887
 
 #equation to put onto graph
-lm_eqn <- function(m) {
-a = format(coef(m)[1], digits = 2)
-b = format(abs(coef(m)[2]), digits = 2)
-  if (coef(m)[2] >= 0)  {
+lm_eqn <- function(M1) {
+a = format(coef(M1)[1], digits = 2)
+b = format(abs(coef(M1)[2]), digits = 2)
+  if (coef(M1)[2] >= 0)  {
     eq <- paste('y','=', a, '+', b, 'x')
   } else {
     eq <- paste('y','=', a, '-', b, 'x') 
@@ -109,7 +109,7 @@ eq
 }
 
 #making the ggplot of the first model 
-ggM1<-ggplot(data = d, aes(x = x, y = y)) + geom_point() + geom_smooth(method = "lm", formula = y ~ x)+ geom_text(x = 200, y = 750, label= lm_eqn(m))
+ggM1<-ggplot(data = d, aes(x = x, y = y)) + geom_point() + geom_smooth(method = "lm", formula = y ~ x)+ geom_text(x = 200, y = 750, label= lm_eqn(M1))
 ggM1
 ```
 
@@ -188,7 +188,7 @@ summary(logM1)
 #the r2 is now 0.5751, higher than it was for the regular model
 
 #making the ggplot
-ggM2 <- ggplot(data=info, aes(x=r2,y=r1))+xlab("log(Brain_Size_Species_Mean)")+ylab("log(MaxLongevity_m)")+ geom_point() + geom_smooth(method="lm", fullrange=TRUE)+ geom_text(x = 1.5, y = 6, label= lm_eqn(logM1))
+ggM2 <- ggplot(data=d, aes(x=r2,y=r1))+xlab("log(Brain_Size_Species_Mean)")+ylab("log(MaxLongevity_m)")+ geom_point() + geom_smooth(method="lm", fullrange=TRUE)+ geom_text(x = 1.5, y = 6, label= lm_eqn(logM1))
 ggM2
 
 ```
